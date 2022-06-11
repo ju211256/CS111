@@ -12,7 +12,7 @@ public class GuessRandom {
         int subtraction;
         
         //Dialogue
-        System.out.println(" I'm thinking of a number from 1 to 10.");
+        System.out.println("I'm thinking of a number from 1 to 10.");
 
         //Guessing number input
         System.out.print("Your guess?: ");
