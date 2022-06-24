@@ -15,4 +15,3 @@ public class Sqrt
         System.out.println(guess);
     }
 }
-
