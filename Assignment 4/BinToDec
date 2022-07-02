@@ -1,0 +1,13 @@
+public class BinToDec
+{
+    public static void main(String[] args)
+    {
+        //Take binary input from user as string
+        String input = args[0];
+
+        //Binary to Decimal
+        int output=Integer.parseInt(input,2);
+        System.out.println(output);
+    }
+}
+
