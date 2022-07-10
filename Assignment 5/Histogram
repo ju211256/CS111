@@ -1,0 +1,32 @@
+import java.util.Arrays;
+
+public class Histogram 
+{
+    public static void main(String[] args)
+    {
+        String input = args[0];
+
+        // char[] charInput = input.toCharArray();
+        char[] alphabetUpper = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+        char[] alphabetLower = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+        int[] matchCounter = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+        for  (int i = 0; i < input.length(); i++)
+        {
+            char x = input.charAt(i);
+            
+            int searchUpper = Arrays.binarySearch(alphabetUpper, x);
+            int searchLower = Arrays.binarySearch(alphabetLower, x);
+
+            if (searchUpper >= 0) 
+            {
+                matchCounter[searchUpper]++;
+            }
+            if (searchLower >= 0) 
+            {
+                matchCounter[searchLower]++;
+            }
+        }
+        System.out.println(Arrays.toString(matchCounter));
+    }
+}
