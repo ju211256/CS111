@@ -1,0 +1,86 @@
+import java.awt.*;
+import javax.swing.*;
+import java.math.*;
+import java.util.*;
+
+public class Sierpinski extends Canvas
+{
+    public int n;
+    public int x;
+    public int y;
+    public int length;
+
+    public Integer height(int s)
+    {
+        double height = s * Math.sqrt(3)/2;
+        int iHeight = (int) height;
+        return iHeight;
+    }
+
+    public void drawBaseTriangle(Graphics g)
+    {
+        length = 700;
+        
+        g.drawLine(0, 700, 700, 700);
+        g.drawLine(0, 700, length/2, length - height(length));
+        g.drawLine(700, 700, length/2, length - height(length));
+    }
+
+    public void drawDownTriangle(Graphics g, int x, int y, int length) 
+    {
+        int sideLx = x + length / 2;
+        int sideLy = y - height(length);
+        int sideRx = x - (length / 2);
+        int sideRy = y - height(length);
+        
+        int[] xArray = {x, sideLx, sideRx};
+        int[] yArray = {y, sideLy, sideRy};
+
+        g.drawPolygon(xArray, yArray, 3);
+        // System.out.print(Arrays.toString(xArray));
+        // System.out.println(Arrays.toString(yArray));
+    }
+
+    public void drawOrders(Graphics g, int n, int x, int y, int length)
+    {
+        if (n == 0) 
+        {
+            drawBaseTriangle(g);
+        }
+        else if (n == 1) 
+        {
+            drawBaseTriangle(g);
+            drawDownTriangle(g, x, y, length);
+        } 
+        else 
+        {
+            --n;
+            drawDownTriangle(g, x, y, length);
+            drawOrders(g, n, x - length / 2, y, length / 2);
+            drawOrders(g, n, x + length / 2, y, length / 2);
+            drawOrders(g, n, x, y - height(length / 2) * 2, length / 2);
+        }
+    }
+
+    public void paint(Graphics g) 
+    {
+        x = 350;
+        y = 700;
+        length = 350;
+        
+        drawOrders(g, n, x, y, length);
+    }
+
+    public static void main(String[] args)
+    {
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Sierpinski drawing = new Sierpinski();
+        drawing.n = Integer.parseInt(args[0]);
+        drawing.length = 700;
+        drawing.setSize(drawing.length, drawing.length);
+        frame.add(drawing);
+        frame.pack();
+        frame.setVisible(true);
+    }
+}
